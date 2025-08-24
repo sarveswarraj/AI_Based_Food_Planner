@@ -14,7 +14,7 @@ from agno.models.openai import OpenAIChat
 from datetime import datetime
 
 # --- Streamlit Page Config ---
-st.set_page_config(page_title="🍲 AI Food Planner for Travellers", layout="wide")
+st.set_page_config(page_title="🍲 AI Based Restaurant finder for Travellers", layout="wide")
 
 st.markdown(
     """
@@ -35,15 +35,15 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.markdown('<h1 class="title">🍲 AI Food Planner for Travellers</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="title">🍲 AI Based Restaurant finder for Travellers</h1>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Get personalized restaurant & meal recommendations while travelling</p>', unsafe_allow_html=True)
 
 # --- User Inputs ---
 st.markdown("### 📍 Where are you?")
-location = st.text_input("Enter your current city or location:", "Delhi, India")
+location = st.text_input("Enter your current city or location:", )
 
 st.markdown("### 🍴 Food Preferences")
-meal_time = st.radio("When do you want to eat?", ["Morning", "Afternoon", "Night"])
+meal_time = st.radio("When do you want to eat?", ["Tiffin", "Launch","Snacks", "Dinner"])
 diet = st.radio("Diet Preference:", ["Veg", "Non-Veg", "Both"])
 liked_food = st.text_input("🍜 A food item you like:", "Biryani")
 budget = st.selectbox("💰 Budget Range:", ["Low", "Medium", "High"])
@@ -54,8 +54,8 @@ radius = st.sidebar.slider("Search Radius (km):", 1, 20, 5)
 min_rating = st.sidebar.slider("Minimum Restaurant Rating:", 1.0, 5.0, 4.0, 0.1)
 
 # --- API Keys ---
-SERPAPI_KEY = "47e2bdcee8f73axxxxxxxxxxxxxxxxxxxxxxxxxx"
-os.environ["OPENAI_API_KEY"] = "sk-or-v1-80bd045cbb1b43c4dc8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+SERPAPI_KEY = "47e2bdcee8f73aa0d9513fcxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+os.environ["OPENAI_API_KEY"] = "sk-or-v1-80bd045cbb1b43c4dc87cccxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 os.environ["OPENAI_API_BASE"] = "https://openrouter.ai/api/v1"
 
 
