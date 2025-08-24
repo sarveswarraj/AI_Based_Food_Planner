@@ -54,9 +54,14 @@ radius = st.sidebar.slider("Search Radius (km):", 1, 20, 5)
 min_rating = st.sidebar.slider("Minimum Restaurant Rating:", 1.0, 5.0, 4.0, 0.1)
 
 # --- API Keys ---
-SERPAPI_KEY = "47e2bdcee8f73aa0d9513fcxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-os.environ["OPENAI_API_KEY"] = "sk-or-v1-80bd045cbb1b43c4dc87cccxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-os.environ["OPENAI_API_BASE"] = "https://openrouter.ai/api/v1"
+import streamlit as st
+SERPAPI_KEY = st.secrets["SERPAPI_KEY"]
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+os.environ["OPENAI_API_BASE"] = st.secrets["OPENAI_API_BASE"]
+
+# SERPAPI_KEY = "47e2bdcee8f73aa0d9513fcxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# os.environ["OPENAI_API_KEY"] = "sk-or-v1-80bd045cbb1b43c4dc87cccxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# os.environ["OPENAI_API_BASE"] = "https://openrouter.ai/api/v1"
 
 
 # --- SerpAPI Params for Google Maps Places ---
