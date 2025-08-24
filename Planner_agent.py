@@ -54,9 +54,11 @@ radius = st.sidebar.slider("Search Radius (km):", 1, 20, 5)
 min_rating = st.sidebar.slider("Minimum Restaurant Rating:", 1.0, 5.0, 4.0, 0.1)
 
 # --- API Keys ---
-SERPAPI_KEY = "47e2bdcee8f73aa0d9513fcfbe7236c220b5de38ff97481a4b26b3d7d505cfc4"  # Replace with your key
-os.environ["OPENAI_API_KEY"] = "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"
-os.environ["OPENAI_API_BASE"] = "https://openrouter.ai/api/v1"
+SERPAPI_KEY = "47e2bdcee8f73aa0d9513fcfbe7236c220b5de38ff97481a4b26b3d7d505cfc4"   # replace with your key
+os.environ["OPENROUTER_API_KEY"] = "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"
+# SERPAPI_KEY = "47e2bdcee8f73aa0d9513fcfbe7236c220b5de38ff97481a4b26b3d7d505cfc4"  # Replace with your key
+# os.environ["OPENAI_API_KEY"] = "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"
+# os.environ["OPENAI_API_BASE"] = "https://openrouter.ai/api/v1"
 
 # --- SerpAPI Params for Google Maps Places ---
 def fetch_restaurants(location, query, radius_km=5):
