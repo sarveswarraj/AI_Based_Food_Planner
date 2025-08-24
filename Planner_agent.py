@@ -79,7 +79,7 @@ food_recommender = Agent(
         "Make sure suggestions are local and culturally relevant.",
         "Format output with recommended dishes and why they are good choices."
     ],
-    model=OpenRouter(id="google/gemini-2.5-flash-lite"),
+    model=OpenRouter(id="gpt-4o"),
     tools=[SerpApiTools(api_key=SERPAPI_KEY)],
     add_datetime_to_instructions=True,
 )
@@ -91,7 +91,7 @@ restaurant_recommender = Agent(
         "Filter by minimum rating, price/budget, and cuisine relevance (veg/non-veg, liked item).",
         "Return results with name, rating, address, price level if available, and Google Maps link.",
     ],
-    model=OpenRouter(id="google/gemini-2.5-flash-lite"),
+    model=OpenRouter(id="gpt-4o"),
     tools=[SerpApiTools(api_key=SERPAPI_KEY)],
     add_datetime_to_instructions=True,
 )
