@@ -6,8 +6,10 @@ import os
 import json
 from serpapi import GoogleSearch
 from agno.agent import Agent
+from agno.models.google import Gemini
 from agno.tools.serpapi import SerpApiTools
 from agno.models.openrouter import OpenRouter
+from agno.models.openai import OpenAIChat
 from datetime import datetime
 
 # --- Streamlit Page Config ---
@@ -51,8 +53,8 @@ radius = st.sidebar.slider("Search Radius (km):", 1, 20, 5)
 min_rating = st.sidebar.slider("Minimum Restaurant Rating:", 1.0, 5.0, 4.0, 0.1)
 
 # --- API Keys ---
-SERPAPI_KEY = "your-serpapi-key"  # Replace with your key
-os.environ["OPENAI_API_KEY"] = "your-openai-key"
+SERPAPI_KEY = "fd2bb54f91a2fb66f868214f58e3e95eba46d9436fba04d7862292625bfc83a1"  # Replace with your key
+os.environ["OPENAI_API_KEY"] = "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"
 os.environ["OPENAI_API_BASE"] = "https://openrouter.ai/api/v1"
 
 # --- SerpAPI Params for Google Maps Places ---
