@@ -8,6 +8,7 @@ from serpapi import GoogleSearch
 from agno.agent import Agent
 from agno.models.google import Gemini
 from agno.tools.serpapi import SerpApiTools
+from agno.agent import Agent, RunResponse
 from agno.models.openrouter import OpenRouter
 from agno.models.openai import OpenAIChat
 from datetime import datetime
