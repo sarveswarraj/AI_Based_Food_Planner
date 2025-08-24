@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Food_Planner_App_Using_Agno_Agents_OpenRouter_StreamLit.py"""
+"""Food_Planner_App_Using_Agno_Agents_Gemini_2.5_Flash_StreamLit.py"""
 
 import streamlit as st
 import os
+import json
 from serpapi import GoogleSearch
 from agno.agent import Agent
 from agno.tools.serpapi import SerpApiTools
@@ -50,15 +51,16 @@ radius = st.sidebar.slider("Search Radius (km):", 1, 20, 5)
 min_rating = st.sidebar.slider("Minimum Restaurant Rating:", 1.0, 5.0, 4.0, 0.1)
 
 # --- API Keys ---
-SERPAPI_KEY = "fd2bb54f91a2fb66f868214f58e3e95eba46d9436fba04d7862292625bfc83a1"  # replace with your valid SerpAPI key
-os.environ["OPENROUTER_API_KEY"] = "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"  # replace with your OpenRouter key
+SERPAPI_KEY = "your-serpapi-key"  # Replace with your key
+os.environ["OPENAI_API_KEY"] = "your-openai-key"
+os.environ["OPENAI_API_BASE"] = "https://openrouter.ai/api/v1"
 
-# --- SerpAPI Helper Function ---
+# --- SerpAPI Params for Google Maps Places ---
 def fetch_restaurants(location, query, radius_km=5):
     params = {
         "engine": "google_maps",
         "q": query,
-        "location": location,
+        "ll": f"@28.6139,77.2090,15z",  # fallback: Delhi center (replace with geocode later)
         "type": "restaurant",
         "api_key": SERPAPI_KEY
     }
@@ -74,7 +76,7 @@ food_recommender = Agent(
         "Make sure suggestions are local and culturally relevant.",
         "Format output with recommended dishes and why they are good choices."
     ],
-    model=OpenRouter(id="google/gemini-2.5-flash-lite"),  # ✅ using OpenRouter
+    model=OpenRouter(id="google/gemini-2.5-flash-lite"),
     tools=[SerpApiTools(api_key=SERPAPI_KEY)],
     add_datetime_to_instructions=True,
 )
@@ -86,7 +88,7 @@ restaurant_recommender = Agent(
         "Filter by minimum rating, price/budget, and cuisine relevance (veg/non-veg, liked item).",
         "Return results with name, rating, address, price level if available, and Google Maps link.",
     ],
-    model=OpenRouter(id="google/gemini-2.5-flash-lite"),  # ✅ using OpenRouter
+    model=OpenRouter(id="google/gemini-2.5-flash-lite"),
     tools=[SerpApiTools(api_key=SERPAPI_KEY)],
     add_datetime_to_instructions=True,
 )
@@ -116,3 +118,4 @@ if st.button("🍲 Get Food Recommendations"):
     st.write(rest_results.content)
 
     st.success("✅ Food plan generated successfully!")
+
