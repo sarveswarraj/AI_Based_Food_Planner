@@ -54,11 +54,10 @@ radius = st.sidebar.slider("Search Radius (km):", 1, 20, 5)
 min_rating = st.sidebar.slider("Minimum Restaurant Rating:", 1.0, 5.0, 4.0, 0.1)
 
 # --- API Keys ---
-SERPAPI_KEY = "47e2bdcee8f73aa0d9513fcfbe7236c220b5de38ff97481a4b26b3d7d505cfc4"   # replace with your key
-os.environ["OPENROUTER_API_KEY"] = "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"
-# SERPAPI_KEY = "47e2bdcee8f73aa0d9513fcfbe7236c220b5de38ff97481a4b26b3d7d505cfc4"  # Replace with your key
-# os.environ["OPENAI_API_KEY"] = "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"
-# os.environ["OPENAI_API_BASE"] = "https://openrouter.ai/api/v1"
+SERPAPI_KEY = "47e2bdcee8f73axxxxxxxxxxxxxxxxxxxxxxxxxx"
+os.environ["OPENAI_API_KEY"] = "sk-or-v1-80bd045cbb1b43c4dc8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+os.environ["OPENAI_API_BASE"] = "https://openrouter.ai/api/v1"
+
 
 # --- SerpAPI Params for Google Maps Places ---
 def fetch_restaurants(location, query, radius_km=5):
@@ -70,7 +69,9 @@ def fetch_restaurants(location, query, radius_km=5):
         "api_key": SERPAPI_KEY
     }
     search = GoogleSearch(params)
-    return search.get_dict()
+    results = search.get_dict()
+    return results
+
 
 # --- Agents ---
 food_recommender = Agent(
@@ -81,7 +82,7 @@ food_recommender = Agent(
         "Make sure suggestions are local and culturally relevant.",
         "Format output with recommended dishes and why they are good choices."
     ],
-    model=OpenRouter(id="gpt-4o"),
+    model=OpenRouter(id="google/gemini-2.5-flash-lite"),
     tools=[SerpApiTools(api_key=SERPAPI_KEY)],
     add_datetime_to_instructions=True,
 )
@@ -93,7 +94,7 @@ restaurant_recommender = Agent(
         "Filter by minimum rating, price/budget, and cuisine relevance (veg/non-veg, liked item).",
         "Return results with name, rating, address, price level if available, and Google Maps link.",
     ],
-    model=OpenRouter(id="gpt-4o"),
+    model=OpenRouter(id="google/gemini-2.5-flash-lite"),
     tools=[SerpApiTools(api_key=SERPAPI_KEY)],
     add_datetime_to_instructions=True,
 )
